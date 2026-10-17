@@ -1,0 +1,13 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <RootNamespace>Wriggle.Physics</RootNamespace>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="Raylib-cs" Version="7.0.1" />
+    <PackageReference Include="ImGui.NET" Version="1.91.6.1" />
+  </ItemGroup>
+</Project>

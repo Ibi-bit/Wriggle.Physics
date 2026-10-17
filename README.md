@@ -1,7 +1,7 @@
 # Wriggle.Physics
 
-Optional source module containing the current Wriggle physics bodies, world solver, and area effects.
+Optional physics module containing the current Wriggle physics bodies, world solver, destructible terrain, and area effects.
 
-This first extraction intentionally preserves the game's existing contracts (`Wriggle.World.Terrain` and `Wriggle.Characters.Character`) so it can be added to the template without changing gameplay behavior. It is excluded from the base template build until those contracts are moved behind interfaces.
+Terrain is part of this module under `Wriggle.World.Terrain`. Area effects do not depend on game characters: they apply physical effects and expose calculated damage for the host game to apply to its own actors.
 
-Include `Physics/**/*.cs` only in projects that provide those contracts and the Raylib-cs and ImGui.NET dependencies.
+Include `Physics/**/*.cs` in a project with the Raylib-cs and ImGui.NET dependencies. The module includes rendering hooks for the current Raylib game and can be split further later if a headless physics library is needed.

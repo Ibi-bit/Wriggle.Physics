@@ -1,5 +1,4 @@
 using System.Numerics;
-using Wriggle.Characters;
 
 namespace Wriggle.Physics;
 
@@ -12,7 +11,7 @@ public abstract class AreaEffect
         Position = position;
     }
 
-    public abstract void ApplyEffect(PhysicsWorld world, IReadOnlyList<Character> characters);
+    public abstract void ApplyEffect(PhysicsWorld world);
 }
 
 public class ExplosionAreaEffect : AreaEffect
@@ -29,19 +28,18 @@ public class ExplosionAreaEffect : AreaEffect
         Damage = damage;
     }
 
-    public override void ApplyEffect(PhysicsWorld world, IReadOnlyList<Character> characters)
+    public override void ApplyEffect(PhysicsWorld world)
     {
         world.ApplyRadialImpulse(Position, Radius, Force);
         world.CarveTerrain(Position, Radius);
+    }
 
+    public float GetDamageAt(Vector2 targetPosition)
+    {
         if (Radius <= 0f)
-            return;
+            return 0f;
 
-        foreach (Character character in characters)
-        {
-            float distance = Vector2.Distance(Position, character.Body.Position);
-            if (distance < Radius)
-                character.TakeDamage(Damage * (1f - distance / Radius));
-        }
+        float distance = Vector2.Distance(Position, targetPosition);
+        return distance < Radius ? Damage * (1f - distance / Radius) : 0f;
     }
 }
